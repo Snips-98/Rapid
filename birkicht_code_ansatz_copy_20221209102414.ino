@@ -9,7 +9,7 @@ bool dir;
 int ri;
 volatile int posi = 0; 
 long pwr;
-long pwr2;
+
 
 
 void setup() {  
@@ -31,27 +31,20 @@ void loop() {
     pos = posi;
   }
   
-  
-  
-   pwr2 = map(abs(pos), 0, 200, 255, 255); 
   pwr = map(abs(pos), 0, 200, 35, 255); //wenn der Hebel sich der Position 0 nähert soll er auf die Leistung 35 schalten, wenn er sich dem Punkt 200 nähert soll er bis zu diesem Punkt mit der Leistung linear ansteigen bis zum Leistungswert 255
   if (posi < -1) {                      //wenn Position kleiner als -1 also -2,-3.... 
-    analogWrite(IN1, pwr2);              //...dann gilt für IN1 die Befehle der Map Funktion 
+    analogWrite(IN1, pwr);              //...dann gilt für IN1 die Befehle der Map Funktion 
     digitalWrite(IN2, LOW);             //...in andere Richtung ist aus  
   } 
-  else if (posi <= 50) {                  //wenn Position größer als 1.... 
+  else if (posi > 1) {                  //wenn Position größer als 1.... 
     analogWrite(IN2, pwr);              //...dann gilt für IN1 die Befehle der Map Funktion
     digitalWrite(IN1, LOW);             //...in andere Richtung ist aus
   } 
-  else if(posi>50) {
-    digitalWrite(IN1, HIGH);            //im Bereich -1 bis 1 soll der Motor stehen (im 0 Punkt)
-    digitalWrite(IN2, LOW);
-  }
-if (posi>100)
-{
+  else {
     digitalWrite(IN1, LOW);            //im Bereich -1 bis 1 soll der Motor stehen (im 0 Punkt)
     digitalWrite(IN2, LOW);
   }
+
   
   Serial.println(pos);
 }
