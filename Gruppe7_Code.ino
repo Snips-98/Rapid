@@ -70,7 +70,9 @@ void loop() {
     //case das der Joystick immer zur Position 0 zurück kehrt
     case 2:
       Serial.println("0 - 1 - 0");
-      pwr = map(abs(pos), 0, 80, 55, 180); //wenn der Hebel sich der Position 0 nähert soll er auf die Leistung 55 schalten, wenn er sich der Position 80 nähert soll er bis zu diesem Punkt mit der Leistung linear ansteigen bis zum Leistungswert 180
+      pwr = map(abs(pos), 0, 80, 55, 180); //wenn der Hebel sich der Position 0 nähert soll er auf die Leistung 55 schalten, 
+                                           //wenn er sich der Position 80 nähert soll er bis zu diesem Punkt mit der Leistung 
+                                           //linear ansteigen bis zum Leistungswert 180
 
       if (posi < -1) {                      //wenn Position kleiner als -1 also -2,-3.... 
         analogWrite(IN1, pwr);              //...dann gilt für IN1 die Befehle der Map Funktion 
