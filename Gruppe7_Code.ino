@@ -119,6 +119,7 @@ void loop() {
       break;
 
     //case das der Motor immer in 10er Schritten dagegen hält also immer wenn die Position durch 10 keinen Rest ergibt schaltet der Motor an
+    case 4:
       Serial.println("10 steps");
       mod1 = posi % 10; //teilen der Position durch 10 und speichern des Rests in der Variablen mod1
       pwr = map(abs(pos), 0, 200, 220, 220); 
