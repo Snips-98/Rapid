@@ -6,8 +6,8 @@
 const int IN1 = 8;   
 const int IN2 = 9;            
 volatile int posi = 0; 
-
-
+int count1 = 0;
+long pwr;
 
 void setup() {  
 
@@ -16,14 +16,12 @@ void setup() {
   pinMode (IN2, OUTPUT);
   pinMode(ENCA,INPUT);
   pinMode(ENCB,INPUT);
-  attachInterrupt(digitalPinToInterrupt(ENCA), readEncoder, RISING);   
-  ri=0;
-  dir = true;  
+  attachInterrupt(digitalPinToInterrupt(ENCA), readEncoder, RISING);    
 }
 
 
 void loop() {
-  
+  int pos = 0;
   ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {
     pos = posi;
   }
