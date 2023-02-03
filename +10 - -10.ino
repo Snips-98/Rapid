@@ -4,11 +4,8 @@
 #define PWM 7
 
 const int IN1 = 8;   
-const int IN2 = 9;  
-bool dir;            
-int ri;
+const int IN2 = 9;            
 volatile int posi = 0; 
-long pwr;
 
 
 
@@ -31,13 +28,12 @@ void loop() {
     pos = posi;
   }
   
-  pwr = map(abs(pos), 0, 200, 180, 180); //wenn der Hebel sich der Position 0 nähert soll er auf die Leistung 35 schalten, wenn er sich dem Punkt 200 nähert soll er bis zu diesem Punkt mit der Leistung linear ansteigen bis zum Leistungswert 255
-  if (posi % 10 == 0) {                      //wenn Position kleiner als -1 also -2,-3.... 
-    analogWrite(IN1, LOW);              //...dann gilt für IN1 die Befehle der Map Funktion 
-    digitalWrite(IN2, pwr);             //...in andere Richtung ist aus  
+  if (posi % 10 == 0) {                  
+    analogWrite(IN1, LOW);              
+    digitalWrite(IN2, 255);    
   } 
   else {
-    digitalWrite(IN1, LOW);            //im Bereich -1 bis 1 soll der Motor stehen (im 0 Punkt)
+    digitalWrite(IN1, LOW);           
     digitalWrite(IN2, LOW);
   }
 
