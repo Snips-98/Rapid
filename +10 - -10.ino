@@ -23,22 +23,34 @@ void setup() {
 
 
 void loop() {
-  int pos = 0; 
+  
   ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {
     pos = posi;
   }
   
-  if (posi % 10 == 0) {                  
-    analogWrite(IN1, LOW);              
-    digitalWrite(IN2, 255);    
+  mod1 = posi % 10; //teilen der Position durch 10 und speichern des Rests in der Variablen mod1
+  pwr = map(abs(pos), 0, 200, 220, 220); 
+
+  if (mod1 == 0 && posi > count1) {           //wenn Rest 0 und in die Positive Richtung gedreht wird        
+    digitalWrite(IN1, 255);              
+    digitalWrite(IN2, LOW);             
   } 
-  else {
-    digitalWrite(IN1, LOW);           
+  else if (mod1 == 0 && posi < count1) {      //wenn Rest 0 und in die negative Richtung gedreht wird
+    digitalWrite(IN1, LOW);              
+    digitalWrite(IN2, 255);
+  }
+  else {                                      //sonst Motor aus
+    digitalWrite(IN1, LOW);            
     digitalWrite(IN2, LOW);
   }
 
-  
+  count1 = posi;
+
+  Serial.println("position");
   Serial.println(pos);
+  Serial.println();
+  Serial.println("modulo");
+  Serial.println(mod1);
 }
 
 
